@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Eid Mubarak Card 🌙</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;500;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════
+   RESET & FOUNDATIONS
+   ══════════════════════════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --cream:       #FFF8EF;
+  --cream-warm:  #FFF3E2;
+  --teal:        #2BBCB3;
+  --teal-deep:   #1A9E92;
+  --coral:       #FF6F6F;
+  --coral-soft:  #FF9E9E;
+  --yellow:      #FFD43B;
+  --yellow-soft: #FFF0B8;
+  --sky:         #7EC8F0;
+  --emerald:     #1B7A4E;
+  --emerald-l:   #3DA573;
+  --gold:        #D4A843;
+  --gold-light:  #F2DFA0;
+  --lavender:    #C9B3F0;
+  --peach:       #FFD6BA;
+  --mint:        #B8EAD2;
+  --rose:        #F9C5D1;
+  --white:       #FFFFFF;
+  --dark:        #2A2F33;
+  --medium:      #5C6268;
+  --card-bg:     rgba(255,255,255,0.92);
+  --shadow-sm:   0 2px 8px rgba(0,0,0,0.06);
+  --shadow-md:   0 8px 30px rgba(0,0,0,0.08);
+  --shadow-lg:   0 20px 60px rgba(0,0,0,0.10);
+  --radius-card: 32px;
+}
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  font-family: 'Nunito', sans-serif;
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ══════════════════════════════════════
+   LAYOUT WRAPPER
+   ══════════════════════════════════════ */
+.card-wrapper {
+  position: relative;
+  width: 100vw; height: 100vh;
+  overflow: hidden;
+  background: var(--cream);
+}
+
+.page {
+  position: absolute; inset: 0;
+  overflow: hidden;
+  transition: opacity 1s cubic-bezier(.4,0,.2,1),
+              transform 1s cubic-bezier(.4,0,.2,1);
+  will-change: opacity, transform;
+}
+.page.hidden  { opacity:0; transform:scale(.94) translateY(12px); pointer-events:none; }
+.page.visible { opacity:1; transform:scale(1)   translateY(0);    pointer-events:all;  }
+
+/* ══════════════════════════════════════
+   SHARED: SVG DOODLE SHAPES
+   ═══════════════════���══════════════════ */
+.svg-layer {
+  position: absolute; inset:0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+.svg-layer svg {
+  position: absolute;
+  opacity: 0;
+  animation: doodleFadeIn .8s ease forwards;
+}
+
+/* ══════════════════════════════════════
+   PAGE 1 — COVER
+   ══════════════════════════════════════ */
+.page-cover {
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(46,196,182,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(255,111,111,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(255,212,59,0.05) 0%, transparent 60%),
+    linear-gradient(170deg, var(--cream) 0%, #FFF0E0 40%, #EAF9F6 70%, var(--cream) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+/* Ambient glow circles */
+.ambient {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: .18;
+  pointer-events: none;
+  animation: ambientDrift 12s ease-in-out infinite alternate;
+}
+.ambient.a1 { width:280px; height:280px; background:var(--teal);    top:-60px;  left:-40px;  }
+.ambient.a2 { width:220px; height:220px; background:var(--coral);   bottom:10%; right:-30px; animation-delay:4s; }
+.ambient.a3 { width:200px; height:200px; background:var(--yellow);  bottom:-40px; left:30%;  animation-delay:8s; }
+.ambient.a4 { width:160px; height:160px; background:var(--lavender); top:20%;   right:10%;  animation-delay:2s; }
+
+/* Cover Content */
+.cover-content {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  padding: 24px;
+  max-width: 380px;
+}
+
+.cover-crescent {
+  font-size: 72px;
+  line-height: 1;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 6px 24px rgba(212,168,67,0.35));
+  animation: coverFloat 4s ease-in-out infinite;
+}
+
+.cover-stars {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.cover-stars span {
+  font-size: 18px;
+  opacity: .55;
+  animation: twinkle 2.5s ease-in-out infinite;
+}
+.cover-stars span:nth-child(2) { animation-delay:.5s; font-size:14px; }
+.cover-stars span:nth-child(3) { animation-delay:1s;  font-size:22px; }
+.cover-stars span:nth-child(4) { animation-delay:1.5s; font-size:14px; }
+.cover-stars span:nth-child(5) { animation-delay:2s; }
+
+.cover-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.65);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(212,168,67,0.2);
+  border-radius: 50px;
+  padding: 6px 18px;
+  font-size: .78rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  animation: fadeSlideUp .9s .2s ease both;
+}
+
+.cover-title {
+  font-family: 'Baloo 2', cursive;
+  font-size: clamp(2.6rem, 9vw, 4rem);
+  font-weight: 800;
+  line-height: 1.05;
+  color: var(--emerald);
+  margin-bottom: 6px;
+  animation: fadeSlideUp .9s .35s ease both;
+  position: relative;
+}
+.cover-title .accent {
+  display: block;
+  background: linear-gradient(135deg, var(--emerald), var(--teal));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.cover-title::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--gold-light), var(--gold), var(--gold-light), transparent);
+  border-radius: 4px;
+  opacity: .6;
+}
+
+.cover-subtitle {
+  font-size: clamp(.95rem, 3.5vw, 1.15rem);
+  color: var(--medium);
+  font-weight: 600;
+  margin: 18px 0 36px;
+  animation: fadeSlideUp .9s .5s ease both;
+  line-height: 1.6;
+}
+
+/* CTA Button */
+.btn-open {
+  position: relative;
+  font-family: 'Baloo 2', cursive;
+  font-size: clamp(1.1rem, 4vw, 1.3rem);
+  font-weight: 700;
+  padding: 18px 52px;
+  border: none;
+  border-radius: 60px;
+  color: var(--white);
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--emerald-l) 0%, var(--teal) 50%, var(--teal-deep) 100%);
+  background-size: 200% 200%;
+  animation: fadeSlideUp .9s .65s ease both, btnGradient 4s ease infinite;
+  box-shadow:
+    0 6px 20px rgba(46,196,182,0.30),
+    0 2px 6px rgba(0,0,0,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.2);
+  transition: transform .3s ease, box-shadow .3s ease;
+  overflow: hidden;
+  letter-spacing: .5px;
+  z-index: 1;
+}
+.btn-open::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.18) 50%, transparent 60%);
+  transform: translateX(-120%);
+  animation: shimmer 3.5s 1.5s ease infinite;
+}
+.btn-open::after {
+  content: '';
+  position: absolute; inset: -2px;
+  border-radius: 62px;
+  background: linear-gradient(135deg, var(--gold-light), var(--teal), var(--gold-light));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+.btn-open:hover { transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 35px rgba(46,196,182,0.35), 0 4px 10px rgba(0,0,0,0.08);
+}
+.btn-open:hover::after { opacity: 1; }
+.btn-open:active { transform: translateY(0) scale(.98); }
+
+.btn-icon {
+  display: inline-block;
+  margin-right: 6px;
+  font-style: normal;
+  animation: envelopeWiggle 2s 2s ease-in-out infinite;
+}
+
+/* Floating ketupat / ornaments on cover */
+.cover-float-item {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  animation: coverFloat 5s ease-in-out infinite;
+}
+
+/* ══════════════════════════════════════
+   PAGE 2 — GREETING CARD
+   ══════════════════════════════════════ */
+.page-card {
+  background:
+    radial-gradient(ellipse at 30% 10%, rgba(46,196,182,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 90%, rgba(212,168,67,0.06) 0%, transparent 50%),
+    linear-gradient(175deg, #EDF7ED 0%, var(--cream) 28%, #FFF8E8 55%, #EAF9F6 85%, var(--cream) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 5;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+.page-card::-webkit-scrollbar { width: 0; }
+
+/* Subtle dot pattern */
+.pattern-layer {
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: .035;
+  background-image:
+    radial-gradient(circle, var(--emerald) 0.8px, transparent 0.8px);
+  background-size: 24px 24px;
+}
+
+/* Floating icons layer */
+.float-layer {
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+.float-el {
+  position: absolute;
+  animation: floatGentle var(--dur, 6s) var(--delay, 0s) ease-in-out infinite;
+  opacity: var(--opa, 0.14);
+  font-size: var(--fs, 20px);
+  will-change: transform;
+}
+
+/* ── Card Container ── */
+.card-outer {
+  position: relative;
+  z-index: 3;
+  width: 90%;
+  max-width: 400px;
+  margin: 48px auto 0;
+  padding: 4px;
+  border-radius: calc(var(--radius-card) + 4px);
+  background: linear-gradient(145deg, var(--gold-light), rgba(212,168,67,0.2), var(--gold-light));
+  box-shadow: var(--shadow-lg);
+  animation: cardEnter 1s .3s cubic-bezier(.23,1,.32,1) both;
+}
+
+.greeting-card {
+  position: relative;
+  background: linear-gradient(180deg, var(--card-bg) 0%, rgba(255,252,245,0.96) 100%);
+  border-radius: var(--radius-card);
+  padding: 40px 28px 34px;
+  overflow: hidden;
+}
+
+/* Inner dashed border */
+.greeting-card::before {
+  content: '';
+  position: absolute;
+  top: 12px; left: 12px; right: 12px; bottom: 12px;
+  border: 1.5px dashed rgba(212,168,67,0.18);
+  border-radius: calc(var(--radius-card) - 8px);
+  pointer-events: none;
+}
+
+/* Soft inner glow at top */
+.greeting-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 140px;
+  background: linear-gradient(180deg, rgba(212,168,67,0.06) 0%, transparent 100%);
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+  pointer-events: none;
+}
+
+.card-z { position: relative; z-index: 2; }
+
+/* Mosque ornament */
+.card-mosque {
+  text-align: center;
+  font-size: 50px;
+  margin-bottom: 4px;
+  filter: drop-shadow(0 4px 16px rgba(45,106,79,0.15));
+  animation: fadeSlideDown .8s .5s ease both;
+}
+
+/* Stars row */
+.card-stars {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  animation: fadeSlideDown .8s .6s ease both;
+}
+.card-stars span {
+  font-size: 16px;
+  opacity: .5;
+  animation: twinkle 2.8s ease-in-out infinite;
+}
+.card-stars span:nth-child(1) { animation-delay: 0s; }
+.card-stars span:nth-child(2) { animation-delay: .6s; font-size: 12px; }
+.card-stars span:nth-child(3) { animation-delay: 1.2s; font-size: 24px; }
+.card-stars span:nth-child(4) { animation-delay: .4s; font-size: 12px; }
+.card-stars span:nth-child(5) { animation-delay: .9s; }
+
+/* Title */
+.card-title {
+  font-family: 'Baloo 2', cursive;
+  font-size: clamp(1.9rem, 7.5vw, 2.7rem);
+  font-weight: 800;
+  text-align: center;
+  line-height: 1.1;
+  margin-bottom: 4px;
+  animation: fadeSlideUp .9s .7s ease both;
+}
+.card-title .grad-text {
+  background: linear-gradient(135deg, var(--emerald) 0%, var(--teal) 40%, var(--emerald-l) 80%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 5s ease infinite;
+}
+.card-title .emoji-moon {
+  -webkit-text-fill-color: initial;
+  display: inline-block;
+  animation: glowPulse 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 8px rgba(212,168,67,0.4));
+}
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 16px 0;
+}
+.divider .line {
+  width: 44px; height: 1.5px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  border-radius: 2px;
+}
+.divider .gem {
+  color: var(--gold);
+  font-size: 10px;
+  animation: twinkle 3s ease-in-out infinite;
+}
+.divider-anim { animation: fadeIn .8s .9s ease both; }
+
+/* Body text */
+.card-body {
+  text-align: center;
+  animation: fadeSlideUp .9s 1s ease both;
+}
+.card-body p {
+  font-size: clamp(.95rem, 3.4vw, 1.08rem);
+  color: var(--dark);
+  line-height: 1.75;
+  font-weight: 600;
+}
+.card-body .italic-accent {
+  font-style: italic;
+  color: var(--teal-deep);
+  font-weight: 700;
+  display: block;
+  margin-top: 4px;
+}
+
+/* Recipe / Tutorial Box */
+.recipe-box {
+  position: relative;
+  background: linear-gradient(135deg, rgba(184,234,210,0.35) 0%, rgba(255,240,184,0.25) 100%);
+  border: 1.5px solid rgba(46,196,182,0.22);
+  border-radius: 22px;
+  padding: 26px 22px 20px;
+  margin: 20px 0 4px;
+  animation: fadeSlideUp .9s 1.15s ease both;
+}
+.recipe-badge {
+  position: absolute;
+  top: -15px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--white);
+  border: 1.5px solid rgba(46,196,182,0.22);
+  border-radius: 50px;
+  padding: 3px 16px;
+  font-size: .78rem;
+  font-weight: 800;
+  color: var(--teal-deep);
+  letter-spacing: 1px;
+  white-space: nowrap;
+  box-shadow: var(--shadow-sm);
+}
+.recipe-title {
+  font-family: 'Baloo 2', cursive;
+  font-size: clamp(1rem, 3.5vw, 1.12rem);
+  color: var(--emerald);
+  text-align: center;
+  margin-bottom: 14px;
+}
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.step:last-child { margin-bottom: 0; }
+.step-num {
+  flex-shrink: 0;
+  width: 26px; height: 26px;
+  background: linear-gradient(135deg, var(--teal), var(--emerald-l));
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .72rem;
+  font-weight: 800;
+  box-shadow: 0 2px 8px rgba(46,196,182,0.25);
+}
+.step-text {
+  font-size: clamp(.88rem, 3vw, .96rem);
+  color: var(--dark);
+  font-weight: 600;
+  line-height: 1.55;
+  padding-top: 2px;
+}
+
+/* Closing */
+.card-closing {
+  text-align: center;
+  animation: fadeSlideUp .9s 1.3s ease both;
+}
+.closing-wish {
+  font-size: clamp(.96rem, 3.4vw, 1.08rem);
+  color: var(--dark);
+  font-weight: 600;
+  line-height: 1.6;
+}
+.heart-beat {
+  display: inline-block;
+  animation: heartbeat 1.8s ease-in-out infinite;
+}
+.from-label {
+  font-size: .82rem;
+  color: var(--medium);
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-top: 18px;
+  opacity: .7;
+}
+.signature {
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(1.5rem, 5vw, 1.9rem);
+  background: linear-gradient(135deg, var(--coral) 0%, var(--coral-soft) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-top: 4px;
+  filter: drop-shadow(0 2px 6px rgba(255,111,111,0.2));
+}
+
+/* Bottom ornament row */
+.card-footer-orn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+  animation: fadeSlideUp .9s 1.45s ease both;
+}
+.card-footer-orn span {
+  font-size: 16px;
+  opacity: .5;
+  animation: twinkle 2.5s ease-in-out infinite;
+}
+.card-footer-orn span:nth-child(1) { animation-delay: 0s; }
+.card-footer-orn span:nth-child(2) { animation-delay: .4s; }
+.card-footer-orn span:nth-child(3) { animation-delay: .8s; font-size: 20px; opacity: .7; }
+.card-footer-orn span:nth-child(4) { animation-delay: 1.2s; }
+.card-footer-orn span:nth-child(5) { animation-delay: 1.6s; }
+
+/* Sparkles */
+.sparkle-layer {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  z-index: 1;
+}
+.sparkle-dot {
+  position: absolute;
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0;
+  animation: sparklePop 3s var(--d, 0s) ease-in-out infinite;
+}
+
+/* Download wrapper */
+.download-section {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  margin: 28px auto 60px;
+  animation: fadeSlideUp .9s 1.6s ease both;
+}
+.btn-download {
+  font-family: 'Baloo 2', cursive;
+  font-size: clamp(.95rem, 3.5vw, 1.08rem);
+  font-weight: 700;
+  padding: 15px 40px;
+  border: 2px solid rgba(212,168,67,0.3);
+  border-radius: 55px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(255,248,240,0.9));
+  backdrop-filter: blur(10px);
+  color: var(--emerald);
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: all .3s ease;
+  letter-spacing: .3px;
+}
+.btn-download:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 12px 35px rgba(212,168,67,0.2);
+  border-color: var(--gold);
+}
+.btn-download:active { transform: translateY(0) scale(.98); }
+
+/* Music toggle */
+.music-btn {
+  position: fixed;
+  bottom: 20px; right: 20px;
+  z-index: 100;
+  width: 50px; height: 50px;
+  border-radius: 50%;
+  border: 2px solid rgba(212,168,67,0.3);
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  box-shadow: var(--shadow-md);
+  transition: all .3s ease;
+}
+.music-btn.show { display: flex; }
+.music-btn.playing {
+  border-color: var(--teal);
+  animation: musicRing 2s ease-in-out infinite;
+}
+.music-btn:hover { transform: scale(1.08); }
+
+/* Confetti overlay */
+.confetti-canvas {
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 60;
+}
+
+/* ══════════════════════════════════════
+   KEYFRAMES
+   ══════════════════════════════════════ */
+@keyframes fadeSlideUp {
+  from { opacity:0; transform:translateY(28px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes fadeSlideDown {
+  from { opacity:0; transform:translateY(-20px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity:0; }
+  to   { opacity:1; }
+}
+@keyframes coverFloat {
+  0%,100% { transform:translateY(0); }
+  50%     { transform:translateY(-14px); }
+}
+@keyframes floatGentle {
+  0%,100% { transform:translate(0,0) rotate(0deg); }
+  25%     { transform:translate(4px,-10px) rotate(3deg); }
+  50%     { transform:translate(-2px,-18px) rotate(-2deg); }
+  75%     { transform:translate(6px,-8px) rotate(2deg); }
+}
+@keyframes twinkle {
+  0%,100% { opacity:.5; transform:scale(1); }
+  50%     { opacity:.15; transform:scale(.7); }
+}
+@keyframes glowPulse {
+  0%,100% { filter:drop-shadow(0 0 6px rgba(212,168,67,.3)); }
+  50%     { filter:drop-shadow(0 0 18px rgba(212,168,67,.6)); }
+}
+@keyframes gradientShift {
+  0%,100% { background-position:0% 50%; }
+  50%     { background-position:100% 50%; }
+}
+@keyframes heartbeat {
+  0%,100% { transform:scale(1); }
+  14%     { transform:scale(1.25); }
+  28%     { transform:scale(1); }
+  42%     { transform:scale(1.18); }
+  56%     { transform:scale(1); }
+}
+@keyframes shimmer {
+  0%   { transform:translateX(-120%); }
+  50%  { transform:translateX(120%); }
+  100% { transform:translateX(120%); }
+}
+@keyframes btnGradient {
+  0%,100% { background-position:0% 50%; }
+  50%     { background-position:100% 50%; }
+}
+@keyframes envelopeWiggle {
+  0%,100% { transform:rotate(0deg); }
+  20%     { transform:rotate(-8deg); }
+  40%     { transform:rotate(8deg); }
+  60%     { transform:rotate(-4deg); }
+  80%     { transform:rotate(4deg); }
+}
+@keyframes ambientDrift {
+  0%   { transform:translate(0,0) scale(1); }
+  100% { transform:translate(30px,20px) scale(1.15); }
+}
+@keyframes cardEnter {
+  from { opacity:0; transform:translateY(50px) scale(.92); }
+  to   { opacity:1; transform:translateY(0) scale(1); }
+}
+@keyframes sparklePop {
+  0%,100% { opacity:0; transform:scale(0); }
+  15%     { opacity:1; transform:scale(1.2); }
+  30%     { opacity:.6; transform:scale(.8); }
+  50%     { opacity:0; transform:scale(0); }
+}
+@keyframes musicRing {
+  0%,100% { box-shadow:0 0 0 0 rgba(46,196,182,.25); }
+  50%     { box-shadow:0 0 0 12px rgba(46,196,182,0); }
+}
+@keyframes doodleFadeIn {
+  from { opacity:0; transform:scale(.5) rotate(-10deg); }
+  to   { opacity:var(--target-o,.35); transform:scale(1) rotate(0deg); }
+}
+@keyframes doodleFloat {
+  0%,100% { transform:translate(0,0) rotate(var(--r1,0deg)); }
+  50%     { transform:translate(var(--tx,5px),var(--ty,-12px)) rotate(var(--r2,4deg)); }
+}
+@keyframes confettiDrop {
+  0%   { transform:translateY(-20px) rotate(0deg); opacity:1; }
+  100% { transform:translateY(105vh) rotate(var(--spin,720deg)); opacity:0; }
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════ */
+@media (max-width:380px) {
+  .greeting-card { padding:34px 20px 28px; }
+  .recipe-box    { padding:22px 16px 16px; }
+  .card-outer    { width:93%; }
+}
+@media (min-width:500px) {
+  .greeting-card { padding:48px 38px 40px; }
+}
+</style>
+</head>
+<body>
+
+<div class="card-wrapper" id="cardWrapper">
+
+  <!-- ═══════ PAGE 1: COVER ═══════ -->
+  <div class="page page-cover visible" id="pageCover">
+
+    <!-- Ambient glows -->
+    <div class="ambient a1"></div>
+    <div class="ambient a2"></div>
+    <div class="ambient a3"></div>
+    <div class="ambient a4"></div>
+
+    <!-- SVG doodle layer (generated by JS) -->
+    <div class="svg-layer" id="coverDoodles"></div>
+
+    <!-- Floating cover ornaments (generated by JS) -->
+    <div id="coverFloats"></div>
+
+    <!-- Content -->
+    <div class="cover-content">
+
+      <div class="cover-crescent">🌙</div>
+
+      <div class="cover-stars">
+        <span>✦</span><span>✧</span><span>⭐</span><span>✧</span><span>✦</span>
+      </div>
+
+      <div class="cover-badge">✨ Assalamualaikum ✨</div>
+
+      <h1 class="cover-title">
+        <span class="accent">Eid Mubarak</span>
+        1447 H
+      </h1>
+
+      <p class="cover-subtitle">
+        A special message<br>just for you 💛
+      </p>
+
+      <button class="btn-open" id="btnOpen" onclick="openCard()">
+        <i class="btn-icon">✉️</i> Klik Di Sini
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══════ PAGE 2: GREETING CARD ═══════ -->
+  <div class="page page-card hidden" id="pageCard">
+    <div class="pattern-layer"></div>
+    <div class="float-layer" id="floatLayer"></div>
+
+    <div class="card-outer" id="cardOuter">
+      <div class="greeting-card" id="greetingCard">
+
+        <div class="sparkle-layer" id="sparkleLayer"></div>
+
+        <div class="card-z">
+
+          <!-- Mosque -->
+          <div class="card-mosque">🕌</div>
+
+          <!-- Stars row -->
+          <div class="card-stars">
+            <span>✦</span><span>✧</span><span>🌙</span><span>✧</span><span>✦</span>
+          </div>
+
+          <!-- Title -->
+          <h2 class="card-title">
+            <span class="grad-text">Happy Eid<br>Mubarak</span>
+            <span class="emoji-moon"> 🌙</span>
+          </h2>
+
+          <!-- Divider -->
+          <div class="divider divider-anim">
+            <span class="line"></span>
+            <span class="gem">✦</span>
+            <span class="gem">◆</span>
+            <span class="gem">✦</span>
+            <span class="line"></span>
+          </div>
+
+          <!-- Body -->
+          <div class="card-body">
+            <p>
+              Semoga setelah Lebaran,<br>
+              hari-harimu dipenuhi<br>
+              banyak hal manis<br>
+              <span class="italic-accent">—minimal semanis puding ini 🍮</span>
+            </p>
+          </div>
+
+          <!-- Recipe Box -->
+          <div class="recipe-box">
+            <div class="recipe-badge">🍮 Tutorial</div>
+            <div class="recipe-title">Cara Menikmati Puding:</div>
+            <div class="step">
+              <span class="step-num">1</span>
+              <span class="step-text">Tuang fla di atas puding 🥄</span>
+            </div>
+            <div class="step">
+              <span class="step-num">2</span>
+              <span class="step-text">Taburkan potongan coklat 🍫</span>
+            </div>
+            <div class="step">
+              <span class="step-num">3</span>
+              <span class="step-text">Lalu nikmati pelan-pelan 😋</span>
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <div class="divider divider-anim" style="animation-delay:1.1s;">
+            <span class="line"></span>
+            <span class="gem">✦</span>
+            <span class="gem">◆</span>
+            <span class="gem">✦</span>
+            <span class="line"></span>
+          </div>
+
+          <!-- Closing -->
+          <div class="card-closing">
+            <p class="closing-wish">Semoga suka yaa <span class="heart-beat">🤍</span></p>
+            <p class="from-label">With love,</p>
+            <p class="signature">Irina</p>
+          </div>
+
+          <!-- Footer ornament -->
+          <div class="card-footer-orn">
+            <span>🌟</span><span>🌙</span><span>✨</span><span>🌙</span><span>🌟</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Download -->
+    <div class="download-section">
+      <button class="btn-download" id="btnDownload" onclick="downloadCard()">
+        📥 Download Kartu
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Music button -->
+<button class="music-btn" id="musicBtn" onclick="toggleMusic()">🔊</button>
+
+<!-- Audio -->
+<audio id="bgMusic" loop preload="auto">
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<!-- html2canvas -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script>
+/* ══════════════════════════════════════
+   SVG DOODLE GENERATOR
+   ══════════════════════════════════════ */
+const COLORS = {
+  teal:'#2BBCB3', coral:'#FF6F6F', yellow:'#FFD43B',
+  sky:'#7EC8F0', gold:'#D4A843', lavender:'#C9B3F0',
+  mint:'#91D8BC', rose:'#F9C5D1', emerald:'#3DA573', peach:'#FFD6BA'
+};
+const C_ARR = Object.values(COLORS);
+const pick  = a => a[Math.floor(Math.random()*a.length)];
+const rand  = (a,b) => Math.random()*(b-a)+a;
+
+function makeSvg(html, w, h) {
+  const ns = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(ns,'svg');
+  svg.setAttribute('width', w);
+  svg.setAttribute('height', h);
+  svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+  svg.setAttribute('fill', 'none');
+  svg.innerHTML = html;
+  return svg;
+}
+
+/* Squiggle line */
+function squiggleSvg() {
+  const c = pick(C_ARR);
+  const w = rand(60,110)|0, h = 30;
+  const a = rand(6,12)|0;
+  let d = `M 0 ${h/2}`;
+  const segs = (rand(3,5)|0);
+  const sw = w / segs;
+  for (let i = 0; i < segs; i++) {
+    const dir = i % 2 === 0 ? -a : a;
+    d += ` Q ${(sw*i + sw/2)|0} ${h/2+dir} ${(sw*(i+1))|0} ${h/2}`;
+  }
+  return makeSvg(`<path d="${d}" stroke="${c}" stroke-width="2.5" stroke-linecap="round"/>`, w, h);
+}
+
+/* Spiral */
+function spiralSvg() {
+  const c = pick(C_ARR);
+  const s = rand(28,44)|0;
+  let d = '';
+  const cx = s/2, cy = s/2;
+  for (let t = 0; t < Math.PI*4; t += 0.15) {
+    const r = 2 + t * 2.2;
+    const x = cx + r * Math.cos(t);
+    const y = cy + r * Math.sin(t);
+    d += (t === 0 ? 'M' : 'L') + ` ${x.toFixed(1)} ${y.toFixed(1)}`;
+  }
+  return makeSvg(`<path d="${d}" stroke="${c}" stroke-width="2" stroke-linecap="round" fill="none"/>`, s, s);
+}
+
+/* Star shape */
+function starSvg() {
+  const c = pick(C_ARR);
+  const s = rand(20,36)|0;
+  const cx = s/2, cy = s/2;
+  const pts = 5, ro = s/2-2, ri = ro*0.4;
+  let d = '';
+  for (let i = 0; i < pts*2; i++) {
+    const a = (Math.PI/2*3) + (i * Math.PI / pts);
+    const r = i % 2 === 0 ? ro : ri;
+    d += (i===0?'M':'L') + ` ${(cx+Math.cos(a)*r).toFixed(1)} ${(cy+Math.sin(a)*r).toFixed(1)}`;
+  }
+  d += 'Z';
+  return makeSvg(`<path d="${d}" fill="${c}" opacity=".35"/>`, s, s);
+}
+
+/* Circle blob */
+function blobSvg() {
+  const c = pick(C_ARR);
+  const s = rand(30,60)|0;
+  const r1=s*rand(.3,.45), r2=s*rand(.25,.4);
+  return makeSvg(
+    `<ellipse cx="${s/2}" cy="${s/2}" rx="${r1.toFixed(0)}" ry="${r2.toFixed(0)}" fill="${c}" opacity=".18" />`,
+    s, s
+  );
+}
+
+/* Crescent moon */
+function crescentSvg() {
+  const c = COLORS.gold;
+  const s = rand(28,42)|0;
+  const cx = s/2, cy = s/2, r = s/2-3;
+  return makeSvg(
+    `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${c}" opacity=".25"/>
+     <circle cx="${cx+r*0.35}" cy="${cy-r*0.1}" r="${r*0.78}" fill="#FFF8EF"/>`,
+    s, s
+  );
+}
+
+/* Diamond / ketupat shape */
+function ketupatSvg() {
+  const c = pick([COLORS.emerald, COLORS.teal, COLORS.gold]);
+  const s = rand(24,38)|0;
+  const m = s/2;
+  const d = `M ${m} 2 L ${s-2} ${m} L ${m} ${s-2} L 2 ${m} Z`;
+  return makeSvg(
+    `<path d="${d}" fill="none" stroke="${c}" stroke-width="2" opacity=".35"/>
+     <line x1="${m}" y1="6" x2="${m}" y2="${s-6}" stroke="${c}" stroke-width="1" opacity=".2"/>
+     <line x1="6" y1="${m}" x2="${s-6}" y2="${m}" stroke="${c}" stroke-width="1" opacity=".2"/>`,
+    s, s
+  );
+}
+
+/* Small dot cluster */
+function dotsSvg() {
+  const c = pick(C_ARR);
+  const s = 30;
+  let circles = '';
+  for (let i = 0; i < 3; i++) {
+    circles += `<circle cx="${rand(5,25).toFixed(0)}" cy="${rand(5,25).toFixed(0)}" r="${rand(2,4).toFixed(1)}" fill="${c}" opacity=".3"/>`;
+  }
+  return makeSvg(circles, s, s);
+}
+
+/* Confetti rectangle */
+function confettiSvg() {
+  const c = pick(C_ARR);
+  const w = rand(6,10)|0, h = rand(14,22)|0;
+  return makeSvg(
+    `<rect x="0" y="0" width="${w}" height="${h}" rx="2" fill="${c}" opacity=".55"/>`,
+    w, h
+  );
+}
+
+/* Wavy line (horizontal deco) */
+function wavySvg() {
+  const c = pick(C_ARR);
+  const w = rand(50,90)|0, h = 16;
+  const a = rand(3,6)|0;
+  let d = `M 0 ${h/2}`;
+  const segs = 4;
+  const sw = w / segs;
+  for (let i = 0; i < segs; i++) {
+    const dir = i % 2 === 0 ? -a : a;
+    d += ` C ${(sw*i+sw*0.33)|0} ${h/2+dir}, ${(sw*i+sw*0.66)|0} ${h/2+dir}, ${(sw*(i+1))|0} ${h/2}`;
+  }
+  return makeSvg(`<path d="${d}" stroke="${c}" stroke-width="2" stroke-linecap="round"/>`, w, h);
+}
+
+/* ── Place doodles on cover ── */
+function initCoverDoodles() {
+  const container = document.getElementById('coverDoodles');
+  const generators = [
+    squiggleSvg, spiralSvg, starSvg, blobSvg,
+    crescentSvg, ketupatSvg, dotsSvg, confettiSvg, wavySvg
+  ];
+
+  const count = window.innerWidth < 500 ? 28 : 42;
+
+  for (let i = 0; i < count; i++) {
+    const svg = pick(generators)();
+    const x = rand(2, 94);
+    const y = rand(2, 94);
+    const rot = rand(-25, 25);
+    const delay = rand(0, 2);
+    const targetO = rand(0.15, 0.40);
+
+    svg.style.cssText = `
+      left:${x}%;
+      top:${y}%;
+      transform:rotate(${rot}deg);
+      --target-o:${targetO.toFixed(2)};
+      animation:
+        doodleFadeIn .8s ${delay.toFixed(1)}s ease forwards,
+        doodleFloat ${rand(5,9).toFixed(1)}s ${delay.toFixed(1)}s ease-in-out infinite;
+      --tx:${rand(-6,6).toFixed(0)}px;
+      --ty:${rand(-14,-4).toFixed(0)}px;
+      --r1:${rand(-3,3).toFixed(0)}deg;
+      --r2:${rand(-5,5).toFixed(0)}deg;
+    `;
+
+    container.appendChild(svg);
+  }
+}
+
+/* ── Floating cover ornaments (emoji) ── */
+function initCoverFloats() {
+  const container = document.getElementById('coverFloats');
+  const items = [
+    { e:'🏮', positions:[[8,12],[88,18]] },
+    { e:'🪭', positions:[[12,82],[85,75]] },
+    { e:'⭐', positions:[[20,30],[78,42],[50,88]] },
+  ];
+  items.forEach(item => {
+    item.positions.forEach(([x,y]) => {
+      const el = document.createElement('div');
+      el.className = 'cover-float-item';
+      el.textContent = item.e;
+      el.style.cssText = `
+        left:${x}%; top:${y}%;
+        font-size:${rand(22,34)|0}px;
+        opacity:${rand(0.25,0.45).toFixed(2)};
+        animation-delay:${rand(0,3).toFixed(1)}s;
+        animation-duration:${rand(4,7).toFixed(1)}s;
+      `;
+      container.appendChild(el);
+    });
+  });
+}
+
+/* ══════════════════════════════════════
+   PAGE 2 ELEMENTS
+   ══════════════════════════════════════ */
+function initFloatLayer() {
+  const layer = document.getElementById('floatLayer');
+  const pool = ['⭐','✨','🌙','✦','🌟','🪭','🏮','☪️'];
+  const n = window.innerWidth < 500 ? 16 : 24;
+  for (let i = 0; i < n; i++) {
+    const el = document.createElement('div');
+    el.className = 'float-el';
+    el.textContent = pick(pool);
+    el.style.cssText = `
+      left:${rand(2,96).toFixed(0)}%;
+      top:${rand(2,96).toFixed(0)}%;
+      --fs:${rand(14,26)|0}px;
+      --opa:${rand(0.08,0.22).toFixed(2)};
+      --dur:${rand(5,10).toFixed(1)}s;
+      --delay:${rand(0,5).toFixed(1)}s;
+    `;
+    layer.appendChild(el);
+  }
+}
+
+function initSparkles() {
+  const layer = document.getElementById('sparkleLayer');
+  for (let i = 0; i < 20; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'sparkle-dot';
+    dot.style.cssText = `
+      left:${rand(5,95).toFixed(0)}%;
+      top:${rand(5,95).toFixed(0)}%;
+      width:${rand(3,6)|0}px;
+      height:${rand(3,6)|0}px;
+      background:${pick([COLORS.gold, COLORS.yellow, COLORS.teal, '#fff'])};
+      --d:${rand(0,4).toFixed(1)}s;
+    `;
+    layer.appendChild(dot);
+  }
+}
+
+/* ══════════════════════════════════════
+   CONFETTI BURST (Canvas)
+   ══════════════════════════════════════ */
+function confettiBurst() {
+  const canvas = document.createElement('canvas');
+  canvas.className = 'confetti-canvas';
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+
+  const pieces = [];
+  const colors = Object.values(COLORS);
+  for (let i = 0; i < 120; i++) {
+    pieces.push({
+      x: rand(0, canvas.width),
+      y: rand(-canvas.height * 0.3, -10),
+      w: rand(5, 10),
+      h: rand(12, 22),
+      r: rand(0, Math.PI * 2),
+      rv: rand(-0.06, 0.06),
+      vy: rand(2, 5),
+      vx: rand(-1.5, 1.5),
+      color: pick(colors),
+      opacity: rand(0.7, 1),
+      shape: Math.random() > 0.5 ? 'rect' : 'circle'
+    });
+  }
+
+  let frame = 0;
+  const maxFrames = 240;
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let alive = false;
+
+    pieces.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.r += p.rv;
+      p.vy += 0.04;
+      p.vx *= 0.999;
+      p.opacity -= 0.002;
+
+      if (p.y < canvas.height + 30 && p.opacity > 0) {
+        alive = true;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.r);
+        ctx.globalAlpha = Math.max(0, p.opacity);
+        ctx.fillStyle = p.color;
+        if (p.shape === 'rect') {
+          ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+        } else {
+          ctx.beginPath();
+          ctx.arc(0, 0, p.w/2, 0, Math.PI*2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+    });
+
+    frame++;
+    if (alive && frame < maxFrames) {
+      requestAnimationFrame(animate);
+    } else {
+      canvas.remove();
+    }
+  }
+  requestAnimationFrame(animate);
+}
+
+/* ══════════════════════════════════════
+   OPEN CARD TRANSITION
+   ══════════════════════════════════════ */
+function openCard() {
+  const cover = document.getElementById('pageCover');
+  const card  = document.getElementById('pageCard');
+  const mBtn  = document.getElementById('musicBtn');
+
+  cover.classList.remove('visible');
+  cover.classList.add('hidden');
+
+  setTimeout(() => {
+    card.classList.remove('hidden');
+    card.classList.add('visible');
+
+    mBtn.classList.add('show');
+    playMusic();
+    confettiBurst();
+    initFloatLayer();
+    initSparkles();
+  }, 500);
+}
+
+/* ══════════════════════════════════════
+   MUSIC CONTROLS
+   ══════════════════════════════════════ */
+const audio = document.getElementById('bgMusic');
+let isPlaying = false;
+
+function playMusic() {
+  audio.volume = 0.35;
+  audio.play().then(() => { isPlaying = true; updateMusicUI(); })
+              .catch(() => { isPlaying = false; updateMusicUI(); });
+}
+
+function toggleMusic() {
+  if (isPlaying) { audio.pause(); isPlaying = false; }
+  else           { audio.play();  isPlaying = true;  }
+  updateMusicUI();
+}
+
+function updateMusicUI() {
+  const btn = document.getElementById('musicBtn');
+  btn.textContent = isPlaying ? '🔊' : '🔇';
+  btn.classList.toggle('playing', isPlaying);
+}
+
+/* ══════════════════════════════════════
+   DOWNLOAD AS 9:16 IMAGE
+   ══════════════════════════════════════ */
+async function downloadCard() {
+  const btn = document.getElementById('btnDownload');
+  btn.innerHTML = '⏳ Menyimpan...';
+  btn.disabled = true;
+
+  try {
+    const source = document.getElementById('greetingCard');
+
+    const captured = await html2canvas(source, {
+      backgroundColor: '#FFFCF5',
+      scale: 3,
+      useCORS: true,
+      logging: false,
+    });
+
+    const TW = 1080, TH = 1920;
+    const final = document.createElement('canvas');
+    final.width = TW; final.height = TH;
+    const ctx = final.getContext('2d');
+
+    /* background gradient */
+    const g = ctx.createLinearGradient(0,0,TW,TH);
+    g.addColorStop(0,   '#EDF7ED');
+    g.addColorStop(0.3, '#FFF8EF');
+    g.addColorStop(0.6, '#FFF8E8');
+    g.addColorStop(1,   '#EAF9F6');
+    ctx.fillStyle = g;
+    ctx.fillRect(0,0,TW,TH);
+
+    /* subtle dot pattern */
+    ctx.fillStyle = 'rgba(45,106,79,0.035)';
+    for (let x=0; x<TW; x+=24) for (let y=0; y<TH; y+=24) {
+      ctx.beginPath(); ctx.arc(x,y,0.8,0,Math.PI*2); ctx.fill();
+    }
+
+    /* gold border frame */
+    const pad = 50;
+    const borderR = 46;
+    ctx.strokeStyle = 'rgba(212,168,67,0.2)';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.roundRect(pad, pad, TW-pad*2, TH-pad*2, borderR);
+    ctx.stroke();
+
+    /* card shadow */
+    ctx.shadowColor = 'rgba(45,106,79,0.10)';
+    ctx.shadowBlur = 50;
+    ctx.shadowOffsetY = 20;
+
+    /* scale and center */
+    const maxW = TW - 140, maxH = TH - 240;
+    const sc = Math.min(maxW / captured.width, maxH / captured.height);
+    const w = captured.width * sc;
+    const h = captured.height * sc;
+    const x = (TW - w) / 2;
+    const y = (TH - h) / 2;
+
+    /* rounded clip for card */
+    ctx.beginPath();
+    ctx.roundRect(x, y, w, h, 38 * sc);
+    ctx.clip();
+    ctx.drawImage(captured, x, y, w, h);
+
+    /* reset shadow */
+    ctx.shadowColor = 'transparent';
+
+    /* download */
+    const link = document.createElement('a');
+    link.download = 'Eid-Mubarak-Card-Irina.png';
+    link.href = final.toDataURL('image/png', 1.0);
+    link.click();
+
+  } catch(e) {
+    console.error(e);
+    alert('Gagal download. Coba screenshot ya! 📸');
+  }
+
+  btn.innerHTML = '📥 Download Kartu (9:16)';
+  btn.disabled = false;
+}
+
+/* ══════════════════════════════════════
+   INIT
+   ══════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  initCoverDoodles();
+  initCoverFloats();
+});
+</script>
+</body>
+</html>
